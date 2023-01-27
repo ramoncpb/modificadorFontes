@@ -1,86 +1,47 @@
 //++++ESSA PARTE FOI DESTINADA PARA TRABALHAR COM AS IMPORTAÇÕES DO REACT++++
-import { StatusBar } from 'expo-status-bar';
-import {useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+import { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
 
 //++++ESSA PARTE FOI DESTINADA PARA TRABALHAR COM OS VALORES COLETADOS++++
 export default function App() {
 
-//++++ESSA PARTE FOI DESTINADA PARA TRABALHAR COM A LÓGICA E ESTRUTURA DO PROJETO++++  
+  //++++ESSA PARTE FOI DESTINADA PARA TRABALHAR COM A LÓGICA E ESTRUTURA DO PROJETO++++   
+  
+  const [corFundo, setCorFundo] = useState('white')
+  const [tamFonte, setTamFonte] = useState(20)
+  const [corFonte, setCorFonte] = useState('black')
+
   return (  
     <View style={styles.telaInteira}>
-      <View Style={styles.topoTela}>
-        <View style={styles.areaZoom}>
-            <TouchableOpacity style={styles.botaoZoom}
-              onPress={() => {
-                setTamFonte(tamFonte + 2)
-              }
-              }
-            >
-              <Text style={styles.textoBotao}>+</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.botaoZoom}
-              onPress={() => {
-                setTamFonte(tamFonte - 2)
-              }}
-            >
-              <Text style={styles.textoBotao}>-</Text>
-            </TouchableOpacity>
-          </View>
-          
-          <View style={styles.areaBotaoCor}>
-            <TouchableOpacity style={styles.botaoPreto}
-              onPress={() => mudarCorFonte('Preto')}
-            >
+      <StatusBar hidden={true}/>
+      <View style={styles.cabecalhoTela}>
+          <View style={styles.regiaoCorBotoes}>
+            <TouchableOpacity style={styles.botaoRosa} onPress={() => setCorFundo('#F48484') & setCorFonte('black')}>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoVermelho}
-              onPress={() => mudarCorFonte('Vermelho')}
-            >
+            <TouchableOpacity style={styles.botaoRoxo} onPress={() => setCorFundo('#C3ACD0') & setCorFonte('black')}>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoAzul}
-              onPress={() => mudarCorFonte('Azul')}
-            >
+            <TouchableOpacity style={styles.botaoVerde} onPress={() => setCorFundo('#61764B') & setCorFonte('white')}>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoVerde}
-              onPress={() => mudarCorFonte('Verde')}
-            >
+            <TouchableOpacity style={styles.botaoVinho} onPress={() => setCorFundo('#A10035') & setCorFonte('white')}>
             </TouchableOpacity>
           </View>
         </View>
 
-        <View style={styles.centroTela}>
-          <Text style={styles.textoTeste}>Teste</Text>
+        <View style={[styles.centroTela,{backgroundColor: corFundo}]}>
+          <Text style={[styles.textoFonte, {fontSize: tamFonte, color: corFonte}]}>The Power of Programming</Text>
         </View>
 
-        <View Style={styles.inferiorTela}>
-          
-          <View style={styles.areaBotaoCor}>
-            <TouchableOpacity style={styles.botao}
-              onPress={() => mudarFonte('Sans')}
-            >
-              <Text style={styles.textoBotao1}>Sans-Serif</Text>
+        <View style={styles.rodapeTela}>
+          <View style={styles.regiaoBotoesTam}>
+            <TouchableOpacity style={styles.botaoTam} onPress={() => {setTamFonte(tamFonte - 2)}}>
+              <Text style={styles.textoBotaoMenor}> - </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao}
-              onPress={() => mudarFonte('Serif')}
-            >
-              <Text style={styles.textoBotao2}>Serif</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botao}
-              onPress={() => mudarFonte('Mono')}
-            >
-              <Text style={styles.textoBotao3}>Mono</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botao}
-              onPress={() => mudarFonte('Pixel')}
-            >
-              <Text style={styles.textoBotao4}>Pixel</Text>
+            <TouchableOpacity style={styles.botaoTam} onPress={() => {setTamFonte(tamFonte + 2)}}>
+              <Text style={styles.textoBotaoMaior}> + </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -88,114 +49,126 @@ export default function App() {
   );
 }
 
-
 //++++ESSA PARTE FOI DESTINADA PARA TRABALHAR COM O ESTILO DO APLICATIVO++++
+
 const styles = StyleSheet.create({
+
   telaInteira: {
-    flex: 1,
-    backgroundColor: 'purple',
+  flex: 1,
   },
-  topoTela: {
-    flex: 0.2,
+
+  cabecalhoTela: {
+    flex: 0.15,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: '#EDEDED',
   },
-  areaZoom: {
+
+  regiaoCorBotoes: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
-  areaBotaoCor: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  botaoZoom:{
+
+  botaoRosa:{
     margin: 10,
     width: 70,
     height: 70,
     borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'yellow',
+    backgroundColor: '#F48484',
   },
-  botaoPreto:{
+
+  botaoRoxo:{
     margin: 10,
     width: 70,
     height: 70,
     borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#C3ACD0',
   },
-  botaoVermelho:{
-    margin: 10,
-    width: 70,
-    height: 70,
-    borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red',
-  },
-  botaoAzul:{
-    margin: 10,
-    width: 70,
-    height: 70,
-    borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'blue',
-  },
+
   botaoVerde:{
     margin: 10,
     width: 70,
     height: 70,
     borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'green',
+    backgroundColor: '#61764B',
   },
-  centroTela: {
-    flex: 0.5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red',
-  },
-  inferiorTela: {
-    flex: 0.3,
-    background: 'blue',
-  },
-  botao: {
+
+  botaoVinho:{
     margin: 10,
-    width: 380,
-    height: 60,
-    borderRadius: 10,
-    backgroundColor: 'gray',
+    width: 70,
+    height: 70,
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#A10035',
   },
-  textoBotao1: {
-    fontSize: 30,
-    color: 'blue',
-    fontFamily: 'sans-serif',
+
+  centroTela: {
+    flex: 0.9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
   },
-  textoBotao2: {
-    fontSize: 30,
-    color: 'blue',
-    fontFamily: 'serif',
-  },
-  textoBotao3: {
-    fontSize: 30,
-    color: 'blue',
+
+  textoFonte:{
     fontFamily: 'monospace',
   },
-  textoBotao4: {
-    fontSize: 30,
-    color: 'blue',
-    fontFamily: '',
+
+  rodapeTela: {
+    flex: 0.15,
+    backgroundColor: '#EDEDED',
+    
+  },
+
+  regiaoBotoesTam: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginTop: 30,
+  },
+
+  botaoTam: {
+    width: 140,
+    height: 50,
+    borderRadius: 20,
+    backgroundColor: '#191A19',
+    textAlign: 'center',
+    alignSelf:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlignVertical: 'center',
+    alignContent: 'center',
+  },
+
+  textoBotaoMaior: {
+    fontSize: 50,
+    color: '#EEEEEE',
+    marginVertical: -10,
+    fontFamily: 'monospace',
+  },
+
+  textoBotaoMenor: {
+    fontSize: 50,
+    color: '#EEEEEE',
+    marginVertical: -10,
+    fontFamily: 'monospace',
   },
 
 });
